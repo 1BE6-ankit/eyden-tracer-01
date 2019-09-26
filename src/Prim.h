@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ray.h"
+#include <limits>
 
 /**
  * @brief Geometrical Primitives (Prims) base abstract class
@@ -13,7 +14,9 @@ public:
 	/**
 	* @brief Constructor
 	*/
-	CPrim(void) = default;
+	// CPrim(void) = default;
+	CPrim(Vec3f color): color(color) {}
+
 	CPrim(const CPrim&) = delete;
 	virtual ~CPrim(void) = default;
 	const CPrim& operator=(const CPrim&) = delete;
@@ -26,4 +29,11 @@ public:
 	 * @retval false Otherwise
 	 */
 	virtual bool	Intersect(Ray& ray) = 0;
+
+	Vec3f getColor() const {
+		return color;
+	}
+
+private:
+	Vec3f color;
 };
